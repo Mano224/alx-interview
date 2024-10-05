@@ -1,39 +1,21 @@
-# def permute(string, pocket=""):
-#     if len(string) == 0:
-#         print(pocket)
-#     else:
-#         for i in range(len(string)):
-#             letter = string[i]
-#             front = string[0:i]
-#             back = string[i+1:]
-#             together = front + back
-#             permute(together, letter + pocket)
+#!/usr/bin/python3
+'''A module for working with Pascal's triangle.
+'''
 
-# print(permute("AB", ""))
 
 def pascal_triangle(n):
-    if n <= 0:
-        return []
-
-    # Initialize the first row of Pascal's Triangle
-    triangle = [[1]]
-
-    for i in range(1, n):
-        # Start with 1 for the new row
-        row = [1]
-
-        # Compute the values in the middle of the row
-        for j in range(1, i):
-            row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
-
-        # End with 1 for the new row
-        row.append(1)
-
-        # Add the row to the triangle
-        triangle.append(row)
-
+    '''Creates a list of lists of integers representing
+    the Pascal's triangle of a given integer.
+    '''
+    triangle = []
+    if type(n) is not int or n <= 0:
+        return triangle
+    for i in range(n):
+        line = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                line.append(1)
+            elif i > 0 and j > 0:
+                line.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        triangle.append(line)
     return triangle
-
-t = pascal_triangle(5)
-for row in t:
-    print(row)
